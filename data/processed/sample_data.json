@@ -1,0 +1,366 @@
+{
+  "articles": [
+    {
+      "id": "001",
+      "media": "Lefaso.net",
+      "titre": "Le gouvernement annonce de nouvelles mesures économiques",
+      "date": "2025-11-14",
+      "url": "https://lefaso.net/spip.php?article001",
+      "contenu": "Le ministre de l'Économie a annoncé aujourd'hui une série de mesures visant à stimuler la croissance économique du pays...",
+      "categorie": "Économie",
+      "engagement": {
+        "likes": 145,
+        "partages": 32,
+        "commentaires": 18
+      },
+      "sensible": false,
+      "toxicite_score": 0.02
+    },
+    {
+      "id": "002",
+      "media": "Lefaso.net",
+      "titre": "Rencontre internationale sur la sécurité au Sahel",
+      "date": "2025-11-13",
+      "url": "https://lefaso.net/spip.php?article002",
+      "contenu": "Les chefs d'État de la région se sont réunis à Ouagadougou pour discuter des questions de sécurité...",
+      "categorie": "Politique",
+      "engagement": {
+        "likes": 234,
+        "partages": 67,
+        "commentaires": 45
+      },
+      "sensible": false,
+      "toxicite_score": 0.05
+    },
+    {
+      "id": "003",
+      "media": "FasoPresse",
+      "titre": "Les Étalons se qualifient pour la finale",
+      "date": "2025-11-12",
+      "url": "https://fasopresse.bf/article003",
+      "contenu": "L'équipe nationale de football a remporté une victoire éclatante hier soir...",
+      "categorie": "Sport",
+      "engagement": {
+        "likes": 567,
+        "partages": 123,
+        "commentaires": 89
+      },
+      "sensible": false,
+      "toxicite_score": 0.01
+    },
+    {
+      "id": "004",
+      "media": "Sidwaya",
+      "titre": "Nouvelle campagne de vaccination dans les zones rurales",
+      "date": "2025-11-11",
+      "url": "https://sidwaya.info/article004",
+      "contenu": "Le ministère de la Santé lance une grande campagne de vaccination ciblant les populations rurales...",
+      "categorie": "Santé",
+      "engagement": {
+        "likes": 89,
+        "partages": 45,
+        "commentaires": 23
+      },
+      "sensible": false,
+      "toxicite_score": 0.03
+    },
+    {
+      "id": "005",
+      "media": "AIB",
+      "titre": "Festival des Arts et de la Culture: Une édition prometteuse",
+      "date": "2025-11-10",
+      "url": "https://aib.bf/article005",
+      "contenu": "Le Festival des Arts et de la Culture ouvre ses portes avec une programmation riche et variée...",
+      "categorie": "Culture",
+      "engagement": {
+        "likes": 123,
+        "partages": 34,
+        "commentaires": 12
+      },
+      "sensible": false,
+      "toxicite_score": 0.02
+    },
+    {
+      "id": "006",
+      "media": "L'Observateur Paalga",
+      "titre": "Tensions politiques autour de la réforme électorale",
+      "date": "2025-11-09",
+      "url": "https://lobservateur.bf/article006",
+      "contenu": "Les partis politiques de l'opposition critiquent vivement le projet de réforme électorale...",
+      "categorie": "Politique",
+      "engagement": {
+        "likes": 198,
+        "partages": 78,
+        "commentaires": 156
+      },
+      "sensible": true,
+      "toxicite_score": 0.67
+    },
+    {
+      "id": "007",
+      "media": "Lefaso.net",
+      "titre": "Record de production agricole cette année",
+      "date": "2025-11-08",
+      "url": "https://lefaso.net/spip.php?article007",
+      "contenu": "Les autorités agricoles annoncent une récolte exceptionnelle pour la campagne 2025...",
+      "categorie": "Économie",
+      "engagement": {
+        "likes": 276,
+        "partages": 54,
+        "commentaires": 32
+      },
+      "sensible": false,
+      "toxicite_score": 0.04
+    },
+    {
+      "id": "008",
+      "media": "FasoPresse",
+      "titre": "Opération militaire contre les groupes armés",
+      "date": "2025-11-07",
+      "url": "https://fasopresse.bf/article008",
+      "contenu": "Les forces de défense et de sécurité ont mené une opération d'envergure dans la région de l'Est...",
+      "categorie": "Sécurité",
+      "engagement": {
+        "likes": 445,
+        "partages": 123,
+        "commentaires": 234
+      },
+      "sensible": false,
+      "toxicite_score": 0.08
+    },
+    {
+      "id": "009",
+      "media": "Sidwaya",
+      "titre": "Inauguration d'un nouvel hôpital régional",
+      "date": "2025-11-06",
+      "url": "https://sidwaya.info/article009",
+      "contenu": "Le président de la République a inauguré hier un hôpital moderne dans la région des Cascades...",
+      "categorie": "Santé",
+      "engagement": {
+        "likes": 167,
+        "partages": 43,
+        "commentaires": 28
+      },
+      "sensible": false,
+      "toxicite_score": 0.02
+    },
+    {
+      "id": "010",
+      "media": "AIB",
+      "titre": "Championnat national de basketball: Les résultats",
+      "date": "2025-11-05",
+      "url": "https://aib.bf/article010",
+      "contenu": "Le championnat national de basketball se poursuit avec des matchs palpitants...",
+      "categorie": "Sport",
+      "engagement": {
+        "likes": 234,
+        "partages": 45,
+        "commentaires": 67
+      },
+      "sensible": false,
+      "toxicite_score": 0.01
+    },
+    {
+      "id": "011",
+      "media": "L'Observateur Paalga",
+      "titre": "Grève dans le secteur de l'éducation",
+      "date": "2025-11-04",
+      "url": "https://lobservateur.bf/article011",
+      "contenu": "Les syndicats d'enseignants ont déclenché une grève illimitée pour réclamer de meilleures conditions...",
+      "categorie": "Politique",
+      "engagement": {
+        "likes": 567,
+        "partages": 234,
+        "commentaires": 345
+      },
+      "sensible": true,
+      "toxicite_score": 0.45
+    },
+    {
+      "id": "012",
+      "media": "Lefaso.net",
+      "titre": "Prix littéraire national: Les lauréats dévoilés",
+      "date": "2025-11-03",
+      "url": "https://lefaso.net/spip.php?article012",
+      "contenu": "Le jury du prix littéraire national a annoncé les noms des gagnants de cette édition 2025...",
+      "categorie": "Culture",
+      "engagement": {
+        "likes": 89,
+        "partages": 23,
+        "commentaires": 15
+      },
+      "sensible": false,
+      "toxicite_score": 0.01
+    },
+    {
+      "id": "013",
+      "media": "FasoPresse",
+      "titre": "Croissance du PIB: Les prévisions optimistes",
+      "date": "2025-11-02",
+      "url": "https://fasopresse.bf/article013",
+      "contenu": "La Banque mondiale prévoit une croissance économique soutenue pour le Burkina Faso...",
+      "categorie": "Économie",
+      "engagement": {
+        "likes": 123,
+        "partages": 34,
+        "commentaires": 19
+      },
+      "sensible": false,
+      "toxicite_score": 0.03
+    },
+    {
+      "id": "014",
+      "media": "Sidwaya",
+      "titre": "Attaque terroriste déjouée par les forces de sécurité",
+      "date": "2025-11-01",
+      "url": "https://sidwaya.info/article014",
+      "contenu": "Les forces de sécurité ont déjoué une tentative d'attaque terroriste dans la capitale...",
+      "categorie": "Sécurité",
+      "engagement": {
+        "likes": 678,
+        "partages": 234,
+        "commentaires": 445
+      },
+      "sensible": false,
+      "toxicite_score": 0.12
+    },
+    {
+      "id": "015",
+      "media": "AIB",
+      "titre": "Conférence internationale sur le changement climatique",
+      "date": "2025-10-31",
+      "url": "https://aib.bf/article015",
+      "contenu": "Ouagadougou accueille une importante conférence sur les enjeux climatiques en Afrique de l'Ouest...",
+      "categorie": "Politique",
+      "engagement": {
+        "likes": 145,
+        "partages": 67,
+        "commentaires": 34
+      },
+      "sensible": false,
+      "toxicite_score": 0.04
+    },
+    {
+      "id": "016",
+      "media": "L'Observateur Paalga",
+      "titre": "Violences communautaires: Un bilan inquiétant",
+      "date": "2025-10-30",
+      "url": "https://lobservateur.bf/article016",
+      "contenu": "Les tensions intercommunautaires ont fait plusieurs victimes dans la région du Centre-Nord...",
+      "categorie": "Sécurité",
+      "engagement": {
+        "likes": 234,
+        "partages": 123,
+        "commentaires": 267
+      },
+      "sensible": true,
+      "toxicite_score": 0.78
+    },
+    {
+      "id": "017",
+      "media": "Lefaso.net",
+      "titre": "Marathon international de Ouagadougou: Un succès",
+      "date": "2025-10-29",
+      "url": "https://lefaso.net/spip.php?article017",
+      "contenu": "Plus de 5000 participants ont pris part au marathon international de Ouagadougou...",
+      "categorie": "Sport",
+      "engagement": {
+        "likes": 456,
+        "partages": 89,
+        "commentaires": 56
+      },
+      "sensible": false,
+      "toxicite_score": 0.02
+    },
+    {
+      "id": "018",
+      "media": "FasoPresse",
+      "titre": "Épidémie de dengue: Le gouvernement mobilisé",
+      "date": "2025-10-28",
+      "url": "https://fasopresse.bf/article018",
+      "contenu": "Face à la recrudescence des cas de dengue, les autorités sanitaires renforcent les mesures...",
+      "categorie": "Santé",
+      "engagement": {
+        "likes": 234,
+        "partages": 123,
+        "commentaires": 67
+      },
+      "sensible": false,
+      "toxicite_score": 0.06
+    },
+    {
+      "id": "019",
+      "media": "Sidwaya",
+      "titre": "Festival du Film Panafricain: Les temps forts",
+      "date": "2025-10-27",
+      "url": "https://sidwaya.info/article019",
+      "contenu": "Le Festival du Film Panafricain de Ouagadougou bat son plein avec une sélection de qualité...",
+      "categorie": "Culture",
+      "engagement": {
+        "likes": 178,
+        "partages": 45,
+        "commentaires": 29
+      },
+      "sensible": false,
+      "toxicite_score": 0.01
+    },
+    {
+      "id": "020",
+      "media": "AIB",
+      "titre": "Réforme de l'administration publique: Les détails",
+      "date": "2025-10-26",
+      "url": "https://aib.bf/article020",
+      "contenu": "Le gouvernement dévoile son plan de réforme de l'administration publique pour plus d'efficacité...",
+      "categorie": "Politique",
+      "engagement": {
+        "likes": 267,
+        "partages": 78,
+        "commentaires": 123
+      },
+      "sensible": false,
+      "toxicite_score": 0.07
+    }
+  ],
+  "medias": [
+    {
+      "nom": "Lefaso.net",
+      "nb_articles": 156,
+      "engagement_total": 12450,
+      "score_influence": 8.7,
+      "rang": 1,
+      "actif_90j": true
+    },
+    {
+      "nom": "FasoPresse",
+      "nb_articles": 134,
+      "engagement_total": 10234,
+      "score_influence": 7.9,
+      "rang": 2,
+      "actif_90j": true
+    },
+    {
+      "nom": "Sidwaya",
+      "nb_articles": 142,
+      "engagement_total": 9876,
+      "score_influence": 7.5,
+      "rang": 3,
+      "actif_90j": true
+    },
+    {
+      "nom": "AIB",
+      "nb_articles": 98,
+      "engagement_total": 7845,
+      "score_influence": 6.8,
+      "rang": 4,
+      "actif_90j": true
+    },
+    {
+      "nom": "L'Observateur Paalga",
+      "nb_articles": 87,
+      "engagement_total": 6543,
+      "score_influence": 6.2,
+      "rang": 5,
+      "actif_90j": true
+    }
+  ]
+}
