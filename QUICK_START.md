@@ -51,6 +51,9 @@ python -m scrapers.lobservateur_scraper --max-pages 10
 
 # Burkina 24
 python -m scrapers.burkina_24_scraper --max-pages 10
+
+#Collecte training data
+python collect_training_data.py --scrapers burkina24  --max-pages 10
 ```
 
 ### Option 2: Utiliser le script principal (RECOMMANDÉ)
