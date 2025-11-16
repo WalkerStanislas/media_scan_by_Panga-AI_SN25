@@ -35,11 +35,16 @@ ENV/
 .DS_Store
 
 # Data files
-*.sqlite
-*.db
+# data/raw/*.json
+# data/raw/*.csv
+# data/processed/*.json
+# data/processed/*.csv
+# *.sqlite
+# *.db
 
 # Training data (can be large)
-!train_data/README.md
+# train_data/*.json
+# !train_data/README.md
 
 # Logs
 *.log
@@ -60,7 +65,7 @@ logs/
 
 # Jupyter Notebooks
 .ipynb_checkpoints/
-*.ipynb
+# *.ipynb
 
 # Cache
 .cache/

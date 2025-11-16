@@ -2,6 +2,8 @@
 Script pour collecter des données d'entraînement depuis tous les médias
 Exécute les scrapers de training pour collecter des articles avec labels normalisés
 """
+from config.label_mapping import get_label_distribution, STANDARD_LABELS
+
 import sys
 import argparse
 import json
@@ -11,8 +13,6 @@ import subprocess
 
 # Ajouter le répertoire parent au path
 sys.path.append(str(Path(__file__).parent))
-
-from config.label_mapping import get_label_distribution, STANDARD_LABELS
 
 
 def run_training_scraper(scraper_name, max_pages=10):
