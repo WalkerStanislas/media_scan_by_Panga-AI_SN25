@@ -50,3 +50,6 @@ tweepy==4.14.0
 
 # Content Detection
 detoxify==0.5.2
+
+# Apify: for facebook scraping
+apify_client
