@@ -31,12 +31,12 @@ MEDIA_SOURCES = {
         "enabled": True,
         "rubrics": {
             "politique": "https://lefaso.net/spip.php?rubrique2",
-            "economie": "https://lefaso.net/spip.php?rubrique3",
-            "societe": "https://lefaso.net/spip.php?rubrique4",
-            "sport": "https://lefaso.net/spip.php?rubrique5",
-            "international": "https://lefaso.net/spip.php?rubrique7",
-            "culture": "https://lefaso.net/spip.php?rubrique18",
-            "diplomatie": "https://lefaso.net/spip.php?rubrique62",
+            # "economie": "https://lefaso.net/spip.php?rubrique3",
+            # "societe": "https://lefaso.net/spip.php?rubrique4",
+            # "sport": "https://lefaso.net/spip.php?rubrique5",
+            # "international": "https://lefaso.net/spip.php?rubrique7",
+            # "culture": "https://lefaso.net/spip.php?rubrique18",
+            # "diplomatie": "https://lefaso.net/spip.php?rubrique62",
         }
     },
     "fasopresse": {
