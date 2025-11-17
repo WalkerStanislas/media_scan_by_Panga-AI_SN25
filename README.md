@@ -54,11 +54,19 @@ media-scan/
 │   ├── influence_scorer.py     # Calcul scores d'influence
 │   └── sentiment_detector.py   # Détection contenus sensibles
 ├── dashboard/                   # Interface web
-│   └── app.py                  # Application Streamlit
+│   ├── __init__.py             # Module Python
+│   ├── app.py                  # Application Streamlit principale
+│   ├── data_loader.py          # Chargement et traitement des données
+│   ├── report_generator.py    # Génération de rapports (PDF/Excel/JSON)
+│   └── README.md               # Documentation du dashboard
 ├── utils/                       # Utilitaires
 │   └── helpers.py
 ├── main.py                      # Point d'entrée principal
 ├── collect_training_data.py     # Script de collecte ML
+├── start_dashboard.sh           # Script de démarrage (macOS/Linux)
+├── start_dashboard.bat          # Script de démarrage (Windows)
+├── README.md                    # Ce fichier
+├── DASHBOARD_GUIDE.md           # Guide complet du dashboard
 ├── TRAINING_DATA_GUIDE.md       # Guide collecte données ML
 └── SCRAPERS_COMPARISON.md       # Comparaison scrapers
 ```
@@ -131,9 +139,27 @@ python main.py --mode analyze
 
 ### 3. Lancer le dashboard
 
+#### Méthode Rapide (Recommandée)
+
+```bash
+# Sur macOS/Linux
+./start_dashboard.sh
+
+# Sur Windows
+start_dashboard.bat
+```
+
+#### Méthode Manuelle
+
 ```bash
 streamlit run dashboard/app.py
 ```
+
+Le dashboard s'ouvrira automatiquement dans votre navigateur à l'adresse **http://localhost:8501**
+
+Pour plus d'informations sur le dashboard, consultez:
+- **dashboard/README.md** - Documentation du dashboard
+- **DASHBOARD_GUIDE.md** - Guide d'utilisation complet
 
 ## Médias Supportés
 
