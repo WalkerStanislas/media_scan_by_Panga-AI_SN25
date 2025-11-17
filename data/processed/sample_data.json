@@ -14,7 +14,19 @@
         "commentaires": 18
       },
       "sensible": false,
-      "toxicite_score": 0.02
+      "toxicite_score": 0.02,
+      "comments_sensibles": [
+        {
+          "text": "Ces mesures ne serviront à rien, comme d'habitude",
+          "comment_sensible": false,
+          "toxicite_score": 0.15
+        },
+        {
+          "text": "Merci au gouvernement pour ces initiatives",
+          "comment_sensible": false,
+          "toxicite_score": 0.02
+        }
+      ]
     },
     {
       "id": "002",
@@ -30,13 +42,14 @@
         "commentaires": 45
       },
       "sensible": false,
-      "toxicite_score": 0.05
+      "toxicite_score": 0.05,
+      "comments_sensibles": null
     },
     {
       "id": "003",
       "media": "FasoPresse",
       "titre": "Les Étalons se qualifient pour la finale",
-      "date": "2025-11-12",
+      "date": "2025-11-13",
       "url": "https://fasopresse.bf/article003",
       "contenu": "L'équipe nationale de football a remporté une victoire éclatante hier soir...",
       "categorie": "Sport",
@@ -46,7 +59,8 @@
         "commentaires": 89
       },
       "sensible": false,
-      "toxicite_score": 0.01
+      "toxicite_score": 0.01,
+      "comments_sensibles": null
     },
     {
       "id": "004",
@@ -62,13 +76,30 @@
         "commentaires": 23
       },
       "sensible": false,
-      "toxicite_score": 0.03
+      "toxicite_score": 0.03,
+      "comments_sensibles": [
+        {
+          "text": "Les vaccins sont dangereux, ne vous faites pas vacciner!",
+          "comment_sensible": true,
+          "toxicite_score": 0.85
+        },
+        {
+          "text": "C'est un complot pour nous empoisonner tous!",
+          "comment_sensible": true,
+          "toxicite_score": 0.92
+        },
+        {
+          "text": "Excellente initiative du ministère",
+          "comment_sensible": false,
+          "toxicite_score": 0.01
+        }
+      ]
     },
     {
       "id": "005",
       "media": "AIB",
       "titre": "Festival des Arts et de la Culture: Une édition prometteuse",
-      "date": "2025-11-10",
+      "date": "2025-11-13",
       "url": "https://aib.bf/article005",
       "contenu": "Le Festival des Arts et de la Culture ouvre ses portes avec une programmation riche et variée...",
       "categorie": "Culture",
@@ -78,7 +109,8 @@
         "commentaires": 12
       },
       "sensible": false,
-      "toxicite_score": 0.02
+      "toxicite_score": 0.02,
+      "comments_sensibles": null
     },
     {
       "id": "006",
@@ -94,7 +126,34 @@
         "commentaires": 156
       },
       "sensible": true,
-      "toxicite_score": 0.67
+      "toxicite_score": 0.67,
+      "comments_sensibles": [
+        {
+          "text": "L'opposition devrait se taire et laisser le gouvernement travailler",
+          "comment_sensible": false,
+          "toxicite_score": 0.35
+        },
+        {
+          "text": "Ces politiciens ne pensent qu'à leurs intérêts",
+          "comment_sensible": false,
+          "toxicite_score": 0.28
+        },
+        {
+          "text": "Il faut brûler leurs bureaux s'ils continuent comme ça!",
+          "comment_sensible": true,
+          "toxicite_score": 0.95
+        },
+        {
+          "text": "La démocratie est importante pour notre pays",
+          "comment_sensible": false,
+          "toxicite_score": 0.02
+        },
+        {
+          "text": "Ces gens méritent la prison à vie",
+          "comment_sensible": false,
+          "toxicite_score": 0.65
+        }
+      ]
     },
     {
       "id": "007",
@@ -110,13 +169,14 @@
         "commentaires": 32
       },
       "sensible": false,
-      "toxicite_score": 0.04
+      "toxicite_score": 0.04,
+      "comments_sensibles": null
     },
     {
       "id": "008",
       "media": "FasoPresse",
       "titre": "Opération militaire contre les groupes armés",
-      "date": "2025-11-07",
+      "date": "2025-11-09",
       "url": "https://fasopresse.bf/article008",
       "contenu": "Les forces de défense et de sécurité ont mené une opération d'envergure dans la région de l'Est...",
       "categorie": "Sécurité",
@@ -126,7 +186,29 @@
         "commentaires": 234
       },
       "sensible": false,
-      "toxicite_score": 0.08
+      "toxicite_score": 0.08,
+      "comments_sensibles": [
+        {
+          "text": "Bravo à nos forces armées",
+          "comment_sensible": false,
+          "toxicite_score": 0.01
+        },
+        {
+          "text": "Il faut éliminer tous ces terroristes sans pitié",
+          "comment_sensible": false,
+          "toxicite_score": 0.42
+        },
+        {
+          "text": "Courage à nos soldats",
+          "comment_sensible": false,
+          "toxicite_score": 0.02
+        },
+        {
+          "text": "Les civils aussi sont des cibles à abattre",
+          "comment_sensible": true,
+          "toxicite_score": 0.88
+        }
+      ]
     },
     {
       "id": "009",
@@ -142,13 +224,14 @@
         "commentaires": 28
       },
       "sensible": false,
-      "toxicite_score": 0.02
+      "toxicite_score": 0.02,
+      "comments_sensibles": null
     },
     {
       "id": "010",
       "media": "AIB",
       "titre": "Championnat national de basketball: Les résultats",
-      "date": "2025-11-05",
+      "date": "2025-11-04",
       "url": "https://aib.bf/article010",
       "contenu": "Le championnat national de basketball se poursuit avec des matchs palpitants...",
       "categorie": "Sport",
@@ -158,7 +241,8 @@
         "commentaires": 67
       },
       "sensible": false,
-      "toxicite_score": 0.01
+      "toxicite_score": 0.01,
+      "comments_sensibles": null
     },
     {
       "id": "011",
@@ -174,7 +258,74 @@
         "commentaires": 345
       },
       "sensible": true,
-      "toxicite_score": 0.45
+      "toxicite_score": 0.45,
+      "comments_sensibles": [
+        {
+          "text": "Les enseignants ont raison de revendiquer",
+          "comment_sensible": false,
+          "toxicite_score": 0.05
+        },
+        {
+          "text": "Ces fainéants devraient être tous virés",
+          "comment_sensible": false,
+          "toxicite_score": 0.52
+        },
+        {
+          "text": "Il faut augmenter leurs salaires",
+          "comment_sensible": false,
+          "toxicite_score": 0.03
+        },
+        {
+          "text": "Nos enfants souffrent de cette situation",
+          "comment_sensible": false,
+          "toxicite_score": 0.08
+        },
+        {
+          "text": "Le dialogue est nécessaire",
+          "comment_sensible": false,
+          "toxicite_score": 0.02
+        },
+        {
+          "text": "Ces enseignants sont des voleurs",
+          "comment_sensible": false,
+          "toxicite_score": 0.48
+        },
+        {
+          "text": "L'éducation est un droit fondamental",
+          "comment_sensible": false,
+          "toxicite_score": 0.01
+        },
+        {
+          "text": "Ils ne pensent qu'à l'argent",
+          "comment_sensible": false,
+          "toxicite_score": 0.32
+        },
+        {
+          "text": "Il faut brûler les écoles pour leur faire peur",
+          "comment_sensible": true,
+          "toxicite_score": 0.94
+        },
+        {
+          "text": "Le ministère doit agir rapidement",
+          "comment_sensible": false,
+          "toxicite_score": 0.04
+        },
+        {
+          "text": "Vivement la fin de cette grève",
+          "comment_sensible": false,
+          "toxicite_score": 0.06
+        },
+        {
+          "text": "Ces gens méritent d'être emprisonnés",
+          "comment_sensible": false,
+          "toxicite_score": 0.58
+        },
+        {
+          "text": "Les parents d'élèves doivent être patients",
+          "comment_sensible": false,
+          "toxicite_score": 0.02
+        }
+      ]
     },
     {
       "id": "012",
@@ -190,7 +341,8 @@
         "commentaires": 15
       },
       "sensible": false,
-      "toxicite_score": 0.01
+      "toxicite_score": 0.01,
+      "comments_sensibles": null
     },
     {
       "id": "013",
@@ -206,7 +358,8 @@
         "commentaires": 19
       },
       "sensible": false,
-      "toxicite_score": 0.03
+      "toxicite_score": 0.03,
+      "comments_sensibles": null
     },
     {
       "id": "014",
@@ -222,7 +375,8 @@
         "commentaires": 445
       },
       "sensible": false,
-      "toxicite_score": 0.12
+      "toxicite_score": 0.12,
+      "comments_sensibles": null
     },
     {
       "id": "015",
@@ -238,7 +392,8 @@
         "commentaires": 34
       },
       "sensible": false,
-      "toxicite_score": 0.04
+      "toxicite_score": 0.04,
+      "comments_sensibles": null
     },
     {
       "id": "016",
@@ -254,7 +409,64 @@
         "commentaires": 267
       },
       "sensible": true,
-      "toxicite_score": 0.78
+      "toxicite_score": 0.78,
+      "comments_sensibles": [
+        {
+          "text": "Ces communautés doivent apprendre à vivre ensemble",
+          "comment_sensible": false,
+          "toxicite_score": 0.05
+        },
+        {
+          "text": "C'est la faute du gouvernement",
+          "comment_sensible": false,
+          "toxicite_score": 0.18
+        },
+        {
+          "text": "Il faut tuer tous ces étrangers",
+          "comment_sensible": true,
+          "toxicite_score": 0.97
+        },
+        {
+          "text": "Prions pour la paix",
+          "comment_sensible": false,
+          "toxicite_score": 0.01
+        },
+        {
+          "text": "Le dialogue intercommunautaire est essentiel",
+          "comment_sensible": false,
+          "toxicite_score": 0.02
+        },
+        {
+          "text": "Ces gens ne méritent pas de vivre ici",
+          "comment_sensible": false,
+          "toxicite_score": 0.76
+        },
+        {
+          "text": "Il faut chasser toute cette communauté du pays",
+          "comment_sensible": true,
+          "toxicite_score": 0.89
+        },
+        {
+          "text": "La réconciliation est possible",
+          "comment_sensible": false,
+          "toxicite_score": 0.01
+        },
+        {
+          "text": "Les autorités doivent intervenir rapidement",
+          "comment_sensible": false,
+          "toxicite_score": 0.03
+        },
+        {
+          "text": "Nos ancêtres avaient raison de se méfier d'eux",
+          "comment_sensible": false,
+          "toxicite_score": 0.62
+        },
+        {
+          "text": "Brûlez leurs maisons pour qu'ils partent",
+          "comment_sensible": true,
+          "toxicite_score": 0.96
+        }
+      ]
     },
     {
       "id": "017",
@@ -270,7 +482,8 @@
         "commentaires": 56
       },
       "sensible": false,
-      "toxicite_score": 0.02
+      "toxicite_score": 0.02,
+      "comments_sensibles": null
     },
     {
       "id": "018",
@@ -286,7 +499,8 @@
         "commentaires": 67
       },
       "sensible": false,
-      "toxicite_score": 0.06
+      "toxicite_score": 0.06,
+      "comments_sensibles": null
     },
     {
       "id": "019",
@@ -302,7 +516,8 @@
         "commentaires": 29
       },
       "sensible": false,
-      "toxicite_score": 0.01
+      "toxicite_score": 0.01,
+      "comments_sensibles": null
     },
     {
       "id": "020",
@@ -318,7 +533,8 @@
         "commentaires": 123
       },
       "sensible": false,
-      "toxicite_score": 0.07
+      "toxicite_score": 0.07,
+      "comments_sensibles": null
     }
   ],
   "medias": [
