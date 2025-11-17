@@ -146,6 +146,42 @@ class DataLoader:
 
         return timeline
 
+    def get_timeline_data_by_media(self, days: int = 30, selected_medias: List[str] = None) -> pd.DataFrame:
+        """
+        Obtient les données temporelles pour les graphiques avec détail par média
+
+        Args:
+            days: Nombre de jours à afficher
+            selected_medias: Liste des médias à afficher (None = tous les médias)
+
+        Returns:
+            DataFrame avec les articles par jour et par média
+        """
+        if self.articles_df is None or self.articles_df.empty:
+            return pd.DataFrame()
+
+        # Filtrer les derniers jours
+        end_date = self.articles_df['date'].max()
+        start_date = end_date - timedelta(days=days)
+
+        filtered_df = self.articles_df[self.articles_df['date'] >= start_date].copy()
+
+        # Filtrer par médias sélectionnés si spécifié
+        if selected_medias is not None and len(selected_medias) > 0:
+            filtered_df = filtered_df[filtered_df['media'].isin(selected_medias)]
+
+        if filtered_df.empty:
+            return pd.DataFrame()
+
+        # Grouper par date et média
+        timeline = filtered_df.groupby([filtered_df['date'].dt.date, 'media']).agg({
+            'id': 'count'
+        }).reset_index()
+
+        timeline.columns = ['Date', 'Média', 'Nombre d\'articles']
+
+        return timeline
+
     def get_sensitive_articles(self, min_toxicity: float = 0.3) -> pd.DataFrame:
         """
         Obtient les articles sensibles
@@ -255,6 +291,145 @@ class DataLoader:
         engagement = engagement.sort_values('total_engagement', ascending=False)
 
         return engagement
+
+    def analyze_suspicious_comments(self, article: Dict) -> Dict:
+        """
+        Analyse les commentaires d'un article pour détecter les commentaires suspects
+
+        Args:
+            article: Dictionnaire représentant un article
+
+        Returns:
+            Dictionnaire avec les informations sur les commentaires suspects
+        """
+        comments_sensibles = article.get('comments_sensibles', None)
+
+        if comments_sensibles is None or len(comments_sensibles) == 0:
+            return {
+                'has_alert': False,
+                'alert_type': None,
+                'nb_comments_sensibles': 0,
+                'nb_highly_toxic': 0,
+                'max_toxicity': 0.0
+            }
+
+        # Compter les commentaires sensibles et très toxiques
+        nb_sensibles = sum(1 for c in comments_sensibles if c.get('comment_sensible', False))
+        nb_highly_toxic = sum(1 for c in comments_sensibles if c.get('toxicite_score', 0) > 0.8)
+        max_toxicity = max([c.get('toxicite_score', 0) for c in comments_sensibles], default=0.0)
+
+        # Logique d'alerte selon les critères :
+        # 1. Au moins un commentaire sensible (True) ET/OU avec toxicité > 0.8
+        # 2. Plus de 10 commentaires suspects au total
+
+        has_critical_comment = nb_sensibles > 0 or nb_highly_toxic > 0
+        has_mass_suspects = len(comments_sensibles) > 10
+
+        alert_type = None
+        if has_critical_comment and has_mass_suspects:
+            alert_type = 'critical_mass'  # Les deux conditions
+        elif has_critical_comment:
+            alert_type = 'critical'  # Commentaire(s) très toxique(s) ou sensible(s)
+        elif has_mass_suspects:
+            alert_type = 'mass'  # Volume élevé de commentaires suspects
+
+        return {
+            'has_alert': alert_type is not None,
+            'alert_type': alert_type,
+            'nb_comments_sensibles': nb_sensibles,
+            'nb_highly_toxic': nb_highly_toxic,
+            'nb_total_comments': len(comments_sensibles),
+            'max_toxicity': max_toxicity
+        }
+
+    def get_articles_with_suspicious_comments(self) -> pd.DataFrame:
+        """
+        Obtient tous les articles avec des commentaires suspects déclenchant une alerte
+
+        Returns:
+            DataFrame avec les articles ayant des alertes de commentaires
+        """
+        if self.articles_df is None or self.articles_df.empty:
+            return pd.DataFrame()
+
+        articles_with_alerts = []
+
+        for idx, row in self.articles_df.iterrows():
+            article_dict = row.to_dict()
+            alert_info = self.analyze_suspicious_comments(article_dict)
+
+            if alert_info['has_alert']:
+                article_info = {
+                    'id': row['id'],
+                    'media': row['media'],
+                    'titre': row['titre'],
+                    'date': row['date'],
+                    'categorie': row['categorie'],
+                    'url': row['url'],
+                    'alert_type': alert_info['alert_type'],
+                    'nb_comments_sensibles': alert_info['nb_comments_sensibles'],
+                    'nb_highly_toxic': alert_info['nb_highly_toxic'],
+                    'nb_total_comments': alert_info['nb_total_comments'],
+                    'max_toxicity': alert_info['max_toxicity'],
+                    'comments_sensibles': row.get('comments_sensibles', [])
+                }
+                articles_with_alerts.append(article_info)
+
+        if not articles_with_alerts:
+            return pd.DataFrame()
+
+        df_alerts = pd.DataFrame(articles_with_alerts)
+        # Trier par niveau de criticité (critical_mass > critical > mass)
+        df_alerts['alert_priority'] = df_alerts['alert_type'].map({
+            'critical_mass': 3,
+            'critical': 2,
+            'mass': 1
+        })
+        df_alerts = df_alerts.sort_values(['alert_priority', 'max_toxicity'], ascending=[False, False])
+        df_alerts = df_alerts.drop('alert_priority', axis=1)
+
+        return df_alerts
+
+    def get_comments_stats(self) -> Dict:
+        """
+        Calcule les statistiques globales sur les commentaires suspects
+
+        Returns:
+            Dictionnaire avec les statistiques
+        """
+        if self.articles_df is None or self.articles_df.empty:
+            return {}
+
+        total_articles_with_comments = 0
+        total_alerts = 0
+        critical_alerts = 0
+        mass_alerts = 0
+        critical_mass_alerts = 0
+
+        for idx, row in self.articles_df.iterrows():
+            article_dict = row.to_dict()
+            comments = article_dict.get('comments_sensibles', None)
+
+            if comments is not None and len(comments) > 0:
+                total_articles_with_comments += 1
+
+            alert_info = self.analyze_suspicious_comments(article_dict)
+            if alert_info['has_alert']:
+                total_alerts += 1
+                if alert_info['alert_type'] == 'critical':
+                    critical_alerts += 1
+                elif alert_info['alert_type'] == 'mass':
+                    mass_alerts += 1
+                elif alert_info['alert_type'] == 'critical_mass':
+                    critical_mass_alerts += 1
+
+        return {
+            'total_articles_with_comments': total_articles_with_comments,
+            'total_alerts': total_alerts,
+            'critical_alerts': critical_alerts,
+            'mass_alerts': mass_alerts,
+            'critical_mass_alerts': critical_mass_alerts
+        }
 
     def export_to_dict(self) -> Dict:
         """

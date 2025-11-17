@@ -15,6 +15,24 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from dashboard.data_loader import DataLoader
 from dashboard.report_generator import ReportGenerator
+from dashboard.media_config import (
+    get_media_logo_path,
+    get_media_info,
+    CATEGORY_COLORS,
+    get_toxicity_level
+)
+from dashboard.ui_components import (
+    display_media_header,
+    display_media_logo,
+    display_media_card,
+    display_compact_media_badge,
+    display_toxicity_badge,
+    display_stat_card,
+    display_comment_alert_badge,
+    display_comment_alert_icon
+)
+import os
+from PIL import Image
 
 # Configuration de la page
 st.set_page_config(
@@ -24,7 +42,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Style CSS personnalisé
+# Style CSS personnalisé avec meilleurs icons
 st.markdown("""
     <style>
     .main {
@@ -32,14 +50,53 @@ st.markdown("""
     }
     .stMetric {
         background-color: #f0f2f6;
-        padding: 10px;
-        border-radius: 5px;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     h1 {
-        color: #1f77b4;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+    h2, h3 {
+        color: #34495e;
     }
     .reportview-container .markdown-text-container {
-        font-family: 'Arial', sans-serif;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    /* Style pour les menus de navigation */
+    .nav-section {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    /* Logo media */
+    .media-logo {
+        border-radius: 50%;
+        border: 2px solid #e0e0e0;
+        padding: 5px;
+        background: white;
+    }
+    /* Badge personnalisé */
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85em;
+        font-weight: 600;
+    }
+    .badge-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .badge-warning {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    .badge-danger {
+        background-color: #f8d7da;
+        color: #721c24;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -62,17 +119,19 @@ def load_data():
         return None
 
 # Sidebar - Navigation
-st.sidebar.title("📰 MÉDIA-SCAN")
+st.sidebar.title("MÉDIA-SCAN")
 st.sidebar.markdown("---")
 st.sidebar.markdown("**Système d'Observation et d'Analyse des Médias**")
 st.sidebar.markdown("*Conseil Supérieur de la Communication*")
 st.sidebar.markdown("---")
 
-# Menu de navigation
-page = st.sidebar.radio(
-    "Navigation",
+# Menu de navigation avec selectbox
+st.sidebar.markdown("### 🧭 Navigation")
+page = st.sidebar.selectbox(
+    "Choisissez une page",
     ["🏠 Accueil", "📊 Analyse des Médias", "📑 Analyse Thématique",
-     "⚠️ Contenus Sensibles", "📈 Engagement", "📥 Exporter les Rapports"]
+     "⚠️ Contenus Sensibles", "📈 Engagement", "📥 Exporter les Rapports"],
+    label_visibility="collapsed"
 )
 
 # Bouton de rechargement des données
@@ -104,8 +163,13 @@ if data_loader and data_loader.articles_df is not None and not data_loader.artic
 # PAGE 1: ACCUEIL - Vue d'ensemble
 # ============================================================================
 if page == "🏠 Accueil":
+    # Afficher le header avec les logos des médias
+    #display_media_header()
+    
     st.title("🏠 Tableau de Bord - Vue d'Ensemble")
     st.markdown("### Statistiques Globales du Paysage Médiatique Burkinabè")
+
+    
 
     # Statistiques globales
     stats = data_loader.get_global_stats()
@@ -140,6 +204,100 @@ if page == "🏠 Accueil":
             value=stats.get('articles_sensibles', 0),
             delta=f"{stats.get('taux_sensible', 0):.1f}%"
         )
+
+    st.markdown("---")
+
+    # Section Alertes de Commentaires Suspects
+    st.markdown("#### 🚨 Alertes Commentaires Suspects")
+
+    # Obtenir les articles avec des alertes
+    articles_with_alerts = data_loader.get_articles_with_suspicious_comments()
+    comments_stats = data_loader.get_comments_stats()
+
+    if not articles_with_alerts.empty:
+        # Statistiques des alertes
+        col_alert1, col_alert2, col_alert3, col_alert4 = st.columns(4)
+
+        with col_alert1:
+            st.metric(
+                label="🚨 Total Alertes",
+                value=comments_stats.get('total_alerts', 0)
+            )
+
+        with col_alert2:
+            st.metric(
+                label="⚠️ Alertes Critiques",
+                value=comments_stats.get('critical_alerts', 0) + comments_stats.get('critical_mass_alerts', 0)
+            )
+
+        with col_alert3:
+            st.metric(
+                label="📢 Alertes Vigilance",
+                value=comments_stats.get('mass_alerts', 0)
+            )
+
+        with col_alert4:
+            st.metric(
+                label="📝 Articles avec commentaires",
+                value=comments_stats.get('total_articles_with_comments', 0)
+            )
+
+        # Afficher les 3 alertes les plus critiques
+        st.markdown("##### 📌 Alertes Prioritaires")
+
+        top_alerts = articles_with_alerts.head(3)
+
+        for idx, alert in top_alerts.iterrows():
+            with st.expander(f"{alert['titre'][:70]}... | {alert['media']}", expanded=(idx == 0)):
+                # Badge d'alerte
+                display_comment_alert_badge(
+                    alert_type=alert['alert_type'],
+                    nb_comments_sensibles=alert['nb_comments_sensibles'],
+                    nb_highly_toxic=alert['nb_highly_toxic'],
+                    max_toxicity=alert['max_toxicity']
+                )
+
+                # Informations de l'article
+                col1, col2 = st.columns([3, 1])
+
+                with col1:
+                    st.write(f"**Média:** {alert['media']}")
+                    st.write(f"**Catégorie:** {alert['categorie']}")
+                    st.write(f"**Date:** {alert['date'].strftime('%d/%m/%Y')}")
+                    st.write(f"[🔗 Voir l'article]({alert['url']})")
+
+                with col2:
+                    st.metric("Commentaires suspects", alert['nb_total_comments'])
+                    st.metric("Très toxiques", alert['nb_highly_toxic'])
+
+                # Afficher quelques commentaires suspects
+                if alert['comments_sensibles'] and len(alert['comments_sensibles']) > 0:
+                    st.markdown("**Exemples de commentaires suspects:**")
+
+                    # Filtrer et trier les commentaires par toxicité
+                    comments = alert['comments_sensibles']
+                    toxic_comments = [c for c in comments if c.get('comment_sensible', False) or c.get('toxicite_score', 0) > 0.5]
+                    toxic_comments = sorted(toxic_comments, key=lambda x: x.get('toxicite_score', 0), reverse=True)[:3]
+
+                    for comment in toxic_comments:
+                        is_sensible = comment.get('comment_sensible', False)
+                        toxicity = comment.get('toxicite_score', 0)
+
+                        # Icône selon le niveau
+                        if is_sensible or toxicity > 0.8:
+                            icon = "🔴"
+                        elif toxicity > 0.5:
+                            icon = "🟡"
+                        else:
+                            icon = "⚪"
+
+                        st.markdown(f"{icon} _{comment.get('text', 'N/A')}_ (Score: {toxicity:.2f})")
+
+        # Lien vers tous les articles avec alertes
+        if len(articles_with_alerts) > 3:
+            st.info(f"💡 {len(articles_with_alerts) - 3} autre(s) alerte(s) détectée(s). Consultez la page **Contenus Sensibles** pour plus de détails.")
+    else:
+        st.success("✅ Aucune alerte de commentaires suspects détectée pour le moment.")
 
     st.markdown("---")
 
@@ -179,17 +337,89 @@ if page == "🏠 Accueil":
     st.markdown("---")
     st.markdown("#### 📅 Évolution Temporelle des Publications")
 
-    timeline_data = data_loader.get_timeline_data(days=30)
-    if not timeline_data.empty:
-        fig = px.line(
-            timeline_data,
-            x='Date',
-            y='Nombre d\'articles',
-            title="Nombre d'articles publiés par jour (30 derniers jours)",
-            markers=True
+    # Sélecteur de médias
+    col_filter1, col_filter2 = st.columns([3, 1])
+
+    with col_filter1:
+        all_medias = sorted(data_loader.articles_df['media'].unique().tolist())
+        selected_medias = st.multiselect(
+            "Filtrer par média",
+            options=all_medias,
+            default=[],
+            help="Sélectionnez un ou plusieurs médias pour voir leur évolution temporelle"
         )
-        fig.update_traces(line_color='#1f77b4', line_width=2)
-        st.plotly_chart(fig, use_container_width=True)
+
+    with col_filter2:
+        timeline_days = st.selectbox(
+            "Période",
+            options=[7, 15, 30, 60, 90],
+            index=2,
+            help="Nombre de jours à afficher"
+        )
+
+    # Affichage du graphique selon le filtre
+    if selected_medias:
+        # Afficher les données filtrées par média
+        timeline_data_by_media = data_loader.get_timeline_data_by_media(
+            days=timeline_days,
+            selected_medias=selected_medias
+        )
+
+        if not timeline_data_by_media.empty:
+            fig = px.line(
+                timeline_data_by_media,
+                x='Date',
+                y='Nombre d\'articles',
+                color='Média',
+                title=f"Évolution des publications par média ({timeline_days} derniers jours)",
+                markers=True
+            )
+            fig.update_layout(
+                hovermode='x unified',
+                legend=dict(
+                    orientation="h",
+                    yanchor="bottom",
+                    y=1.02,
+                    xanchor="right",
+                    x=1
+                )
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+            # Statistiques pour les médias sélectionnés
+            st.markdown("##### 📊 Statistiques de la période")
+            stat_cols = st.columns(len(selected_medias))
+            for idx, media in enumerate(selected_medias):
+                media_data = timeline_data_by_media[timeline_data_by_media['Média'] == media]
+                total_articles = media_data['Nombre d\'articles'].sum()
+                avg_per_day = media_data['Nombre d\'articles'].mean()
+
+                with stat_cols[idx]:
+                    st.metric(
+                        label=media,
+                        value=f"{int(total_articles)} articles",
+                        delta=f"Moy: {avg_per_day:.1f}/jour"
+                    )
+        else:
+            st.info("Aucune donnée pour les médias sélectionnés sur cette période.")
+    else:
+        # Afficher les données globales (tous les médias)
+        timeline_data = data_loader.get_timeline_data(days=timeline_days)
+        if not timeline_data.empty:
+            fig = px.line(
+                timeline_data,
+                x='Date',
+                y='Nombre d\'articles',
+                title=f"Nombre d'articles publiés par jour - Tous médias ({timeline_days} derniers jours)",
+                markers=True
+            )
+            fig.update_traces(line_color='#1f77b4', line_width=2)
+            st.plotly_chart(fig, use_container_width=True)
+
+            # Statistique globale
+            total_articles = timeline_data['Nombre d\'articles'].sum()
+            avg_per_day = timeline_data['Nombre d\'articles'].mean()
+            st.info(f"📊 Total: {int(total_articles)} articles | Moyenne: {avg_per_day:.1f} articles/jour")
 
     # Top articles
     st.markdown("---")
@@ -199,7 +429,9 @@ if page == "🏠 Accueil":
     if not top_articles.empty:
         for idx, article in top_articles.iterrows():
             with st.expander(f"#{idx+1} - {article['titre'][:80]}..."):
-                col1, col2, col3 = st.columns([2, 1, 1])
+                col_logo, col1, col2, col3 = st.columns([1, 2, 1, 1])
+                with col_logo:
+                    display_media_logo(article['media'], width=50)
                 with col1:
                     st.write(f"**Média:** {article['media']}")
                     st.write(f"**Catégorie:** {article['categorie']}")
@@ -222,14 +454,15 @@ elif page == "📊 Analyse des Médias":
     if not media_ranking.empty:
         st.markdown("#### 🏆 Classement Global des Médias")
 
-        # Affichage du tableau
-        st.dataframe(
-            media_ranking.style.background_gradient(
-                subset=['score_influence'],
-                cmap='RdYlGn'
-            ),
-            use_container_width=True
-        )
+        # Afficher les médias sous forme de cartes avec logos
+        for idx, row in media_ranking.iterrows():
+            display_media_card(
+                media_name=row['nom'],
+                nb_articles=row['nb_articles'],
+                engagement_total=row['engagement_total'],
+                score_influence=row['score_influence'],
+                rang=row['rang']
+            )
 
         st.markdown("---")
 
@@ -288,6 +521,22 @@ elif page == "📊 Analyse des Médias":
         )
 
         if selected_media:
+            # Afficher le header du média sélectionné
+            st.markdown("---")
+            col_logo, col_info = st.columns([1, 4])
+
+            with col_logo:
+                display_media_logo(selected_media, width=100)
+
+            with col_info:
+                media_info = get_media_info(selected_media)
+                st.markdown(f"## {selected_media}")
+                st.markdown(f"*{media_info['description']}*")
+                if media_info['url']:
+                    st.markdown(f"[🌐 Visiter le site]({media_info['url']})")
+
+            st.markdown("---")
+
             media_articles = data_loader.articles_df[
                 data_loader.articles_df['media'] == selected_media
             ].copy()
@@ -555,20 +804,20 @@ elif page == "⚠️ Contenus Sensibles":
 
         for idx, article in filtered_sensitive.iterrows():
             with st.expander(f"[Score: {article['toxicite_score']:.2f}] {article['titre']}"):
-                col1, col2 = st.columns([3, 1])
+                col_logo, col1, col2 = st.columns([1, 3, 1])
+
+                with col_logo:
+                    display_media_logo(article['media'], width=50)
+
                 with col1:
                     st.write(f"**Média:** {article['media']}")
                     st.write(f"**Catégorie:** {article['categorie']}")
                     st.write(f"**Date:** {article['date'].strftime('%d/%m/%Y')}")
                     st.write(f"**URL:** {article['url']}")
+
                 with col2:
-                    # Indicateur visuel du score
-                    if article['toxicite_score'] >= 0.7:
-                        st.error(f"🔴 Score: {article['toxicite_score']:.2f}")
-                    elif article['toxicite_score'] >= 0.5:
-                        st.warning(f"🟡 Score: {article['toxicite_score']:.2f}")
-                    else:
-                        st.info(f"🔵 Score: {article['toxicite_score']:.2f}")
+                    # Badge de toxicité
+                    display_toxicity_badge(article['toxicite_score'])
     else:
         st.info("Aucun contenu sensible détecté avec le seuil actuel.")
 
