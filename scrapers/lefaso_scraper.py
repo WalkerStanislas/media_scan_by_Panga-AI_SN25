@@ -123,7 +123,8 @@ class LefasoScraper(BaseMediaScraper):
         page_num = response.meta.get('page_num')
 
         # Extract title
-        title = response.xpath('//h1[@class="entry-title"]/text()').get()
+        #title = response.xpath('//h1[@class="entry-title"]/text()').get()
+        title = response.xpath('//title/text()').get()
         if not title:
             title = response.xpath('//h1//text()').get()
 
