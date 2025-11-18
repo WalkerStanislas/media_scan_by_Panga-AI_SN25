@@ -46,7 +46,7 @@ class DataLoader:
 
         # Convertir les dates
         if not self.articles_df.empty and 'date' in self.articles_df.columns:
-            self.articles_df['date'] = pd.to_datetime(self.articles_df['date'])
+            self.articles_df['date'] = pd.to_datetime(self.articles_df['date'], format='mixed')
 
         return self.articles_df, self.medias_df
 

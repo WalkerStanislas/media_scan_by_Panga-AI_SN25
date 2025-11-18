@@ -112,7 +112,7 @@ def load_data():
     """Charge les données depuis le fichier JSON"""
     loader = DataLoader()
     try:
-        loader.load_data("sample_data.json")
+        loader.load_data("final_db1.json")
         return loader
     except FileNotFoundError:
         st.error("Fichier de données introuvable. Veuillez vérifier que le fichier existe dans data/processed/")
