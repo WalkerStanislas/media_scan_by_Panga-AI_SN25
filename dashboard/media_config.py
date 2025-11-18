@@ -49,7 +49,7 @@ MEDIA_CONFIG = {
     },
     "BF1": {
         "nom_complet": "BF1",
-        "logo": "bf1.jpg",
+        "logo": "bf1.jpeg",
         "type": "facebook",
         "description": "Chaîne de télévision burkinabè",
         "url": "https://facebook.com/bf1officiel"
@@ -60,6 +60,42 @@ MEDIA_CONFIG = {
         "type": "facebook",
         "description": "Station de radio burkinabè",
         "url": "https://facebook.com/omegaradio"
+    },
+    "Burkina24": {
+        "nom_complet": "Burkina24",
+        "logo": "burkina24.jpg",
+        "type": "web",
+        "description": "Site d'information burkinabè",
+        "url": "https://burkina24.com"
+    },
+    # Aliases pour les médias Facebook (noms exacts dans les données)
+    "BF1TV": {
+        "nom_complet": "BF1",
+        "logo": "bf1.jpeg",
+        "type": "facebook",
+        "description": "Chaîne de télévision burkinabè",
+        "url": "https://facebook.com/bf1officiel"
+    },
+    "RadioOmegafmOfficiel": {
+        "nom_complet": "Oméga Radio",
+        "logo": "omega.jpeg",
+        "type": "facebook",
+        "description": "Station de radio burkinabè",
+        "url": "https://facebook.com/omegaradio"
+    },
+    "rtburkina": {
+        "nom_complet": "Radiodiffusion Télévision du Burkina",
+        "logo": "rtb.jpg",
+        "type": "facebook",
+        "description": "Télévision nationale du Burkina Faso",
+        "url": "https://facebook.com/rtbofficiel"
+    },
+    "naim.toure": {
+        "nom_complet": "Naim Touré",
+        "logo": None,
+        "type": "activiste",
+        "description": "Activiste et commentateur",
+        "url": ""
     },
     # Média supplémentaire à configurer
     "Autre Média": {
